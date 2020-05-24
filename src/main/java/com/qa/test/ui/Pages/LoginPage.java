@@ -9,9 +9,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage extends AbstractPage {
     private final String LOGIN_URI = getContext().getProperty("app.url");
-    private static final String LOGIN_USERNAME_FIELD = "";
-    private static final String LOGIN_PASSWORD_FIELD = "";
-    private static final String LOGIN_BUTTON = "";
+    private static final String LOGIN_USERNAME_FIELD = "[name='uid']";
+    private static final String LOGIN_PASSWORD_FIELD = "[name='password']";
+    private static final String LOGIN_BUTTON = "[name='btnLogin']";
 
     public void goToLoginPage() {
         open(LOGIN_URI);
