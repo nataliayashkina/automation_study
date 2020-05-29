@@ -14,33 +14,53 @@ public class NewCustomerPage extends AbstractPage {
     private static final String EMAIL = "[name='emailid']";
     private static final String SUBMIT_BUTTON = "[name='sub']";
     private static final String PHOME_NUMBER = "[name='telephoneno']";
-    public void registration(){
-        getNameInput().setValue("Natalia");
-        getDateOfBirth().setValue("19.05.1997");
-        getCity().setValue("NewYork");
-        getAdress().setValue("Green str. 123");
-        getState().setValue("NewYork");
-        getPin().setValue("123456");
-        getEmail().setValue("test123@gmail.com");
+
+    public void registration(String name, String dateOfBirth, String city, String address, String state, String pin, String email, String phoneNumber) {
+        getNameInput().setValue(name);
+        getDateOfBirth().setValue(dateOfBirth);
+        getCity().setValue(city);
+        getAdress().setValue(address);
+        getState().setValue(state);
+        getPin().setValue(pin);
+        getEmail().setValue(email);
+        getPhoneNumber().setValue(phoneNumber);
         getSubmitButton().click();
-        getPhoneNumber().setValue("123456789012345");
-
-
-
     }
 
 
+    private SelenideElement getPhoneNumber() {
+        return $(PHOME_NUMBER);
+    }
 
+    private SelenideElement getSubmitButton() {
+        return $(SUBMIT_BUTTON);
+    }
 
+    private SelenideElement getEmail() {
+        return $(EMAIL);
+    }
 
+    private SelenideElement getPin() {
+        return $(PIN);
+    }
 
-    private SelenideElement getPhoneNumber(){ return $(PHOME_NUMBER);}
-    private SelenideElement getSubmitButton(){ return $(SUBMIT_BUTTON);}
-    private SelenideElement getEmail(){ return $(EMAIL);}
-    private SelenideElement getPin(){ return $(PIN);}
-    private SelenideElement getState(){ return $(STATE);}
-    private SelenideElement getAdress(){ return  $(ADRESS);}
-    private SelenideElement getNameInput(){ return $(NAME_INPUT);}
-    private SelenideElement getDateOfBirth(){ return $(DATE_OF_BIRTH);}
-    private SelenideElement getCity(){ return $(CITY_NAME);}
+    private SelenideElement getState() {
+        return $(STATE);
+    }
+
+    private SelenideElement getAdress() {
+        return $(ADRESS);
+    }
+
+    private SelenideElement getNameInput() {
+        return $(NAME_INPUT);
+    }
+
+    private SelenideElement getDateOfBirth() {
+        return $(DATE_OF_BIRTH);
+    }
+
+    private SelenideElement getCity() {
+        return $(CITY_NAME);
+    }
 }

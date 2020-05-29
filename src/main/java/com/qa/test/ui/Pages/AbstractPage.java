@@ -2,6 +2,7 @@ package com.qa.test.ui.Pages;
 
 import com.codeborne.selenide.SelenideDriver;
 import com.qa.test.ui.Util.PropertiesContext;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public abstract class AbstractPage {
     protected SelenideDriver driver;
@@ -17,6 +18,14 @@ public abstract class AbstractPage {
 
     public String getSelector() {
         return "";
+    }
+
+    public String getRandomString() {
+        return RandomStringUtils.randomAlphabetic(10);
+    }
+
+    public String getRandomNumber() {
+        return RandomStringUtils.randomAlphanumeric(11);
     }
 
     public void reload() {

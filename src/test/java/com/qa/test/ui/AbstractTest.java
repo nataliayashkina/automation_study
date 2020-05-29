@@ -35,6 +35,22 @@ public abstract class AbstractTest {
     }
 
     public String getRandomString() {
-        return RandomStringUtils.random(5, true, false);
+        return RandomStringUtils.random(10, true, false);
+    }
+
+    public String getRandomNumber() {
+        return RandomStringUtils.random(10, false, true);
+    }
+
+    public String getRandomDay() {
+        return RandomStringUtils.random(2, 1, 31, false, true);
+    }
+
+    public String getRandomMonth() {
+        return RandomStringUtils.random(2, 1, 12, false, true);
+    }
+
+    public String getRandomYear() {
+        return RandomStringUtils.random(4, 1910, 2010, false, true);
     }
 }
