@@ -34,23 +34,12 @@ public abstract class AbstractTest {
         driver.getWebDriver().quit();
     }
 
-    public String getRandomString() {
-        return RandomStringUtils.random(10, true, false);
+    protected String getRandomString(int length) {
+        return RandomStringUtils.random(length, true, true);
     }
 
-    public String getRandomNumber() {
-        return RandomStringUtils.random(10, false, true);
+    protected String getRandomNumber(int length) {
+        return RandomStringUtils.random(length, false, true);
     }
 
-    public String getRandomDay() {
-        return RandomStringUtils.random(2, 1, 31, false, true);
-    }
-
-    public String getRandomMonth() {
-        return RandomStringUtils.random(2, 1, 12, false, true);
-    }
-
-    public String getRandomYear() {
-        return RandomStringUtils.random(4, 1910, 2010, false, true);
-    }
 }

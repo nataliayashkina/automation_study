@@ -8,12 +8,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class TelecomAccessDetailsPage {
     private static final String HOME_BUTTON = "li .button";
 
-    public void checkOfRegistration(){
-        getHomeButton().shouldBe(Condition.visible);
+    public void checkOfRegistration() {
+        $(HOME_BUTTON).shouldBe(Condition.visible);
     }
 
-
-
-
-    private SelenideElement getHomeButton(){return $(HOME_BUTTON);}
 }

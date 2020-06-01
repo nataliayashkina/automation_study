@@ -20,14 +20,6 @@ public abstract class AbstractPage {
         return "";
     }
 
-    public String getRandomString() {
-        return RandomStringUtils.randomAlphabetic(10);
-    }
-
-    public String getRandomNumber() {
-        return RandomStringUtils.randomAlphanumeric(11);
-    }
-
     public void reload() {
         driver.refresh();
     }

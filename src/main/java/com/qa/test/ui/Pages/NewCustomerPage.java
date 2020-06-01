@@ -1,5 +1,6 @@
 package com.qa.test.ui.Pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -14,53 +15,22 @@ public class NewCustomerPage extends AbstractPage {
     private static final String EMAIL = "[name='emailid']";
     private static final String SUBMIT_BUTTON = "[name='sub']";
     private static final String PHOME_NUMBER = "[name='telephoneno']";
+    private static final String SUCCESS_REGISTRATION_MESSAGE = "body";
 
     public void registration(String name, String dateOfBirth, String city, String address, String state, String pin, String email, String phoneNumber) {
-        getNameInput().setValue(name);
-        getDateOfBirth().setValue(dateOfBirth);
-        getCity().setValue(city);
-        getAdress().setValue(address);
-        getState().setValue(state);
-        getPin().setValue(pin);
-        getEmail().setValue(email);
-        getPhoneNumber().setValue(phoneNumber);
-        getSubmitButton().click();
+        $(NAME_INPUT).setValue(name);
+        $(DATE_OF_BIRTH).setValue(dateOfBirth);
+        $(CITY_NAME).setValue(city);
+        $(ADRESS).setValue((address));
+        $(STATE).setValue(state);
+        $(PIN).setValue(pin);
+        $(EMAIL).setValue(email);
+        $(PHOME_NUMBER).setValue(phoneNumber);
+        $(SUBMIT_BUTTON).click();
     }
 
-
-    private SelenideElement getPhoneNumber() {
-        return $(PHOME_NUMBER);
+    public String getSuccessRegistrationMessage() {
+        return $(SUCCESS_REGISTRATION_MESSAGE).getText();
     }
 
-    private SelenideElement getSubmitButton() {
-        return $(SUBMIT_BUTTON);
-    }
-
-    private SelenideElement getEmail() {
-        return $(EMAIL);
-    }
-
-    private SelenideElement getPin() {
-        return $(PIN);
-    }
-
-    private SelenideElement getState() {
-        return $(STATE);
-    }
-
-    private SelenideElement getAdress() {
-        return $(ADRESS);
-    }
-
-    private SelenideElement getNameInput() {
-        return $(NAME_INPUT);
-    }
-
-    private SelenideElement getDateOfBirth() {
-        return $(DATE_OF_BIRTH);
-    }
-
-    private SelenideElement getCity() {
-        return $(CITY_NAME);
-    }
 }

@@ -18,22 +18,9 @@ public class LoginPage extends AbstractPage {
     }
 
     public StartPage login(Users user) {
-        getUserNameField().setValue(user.getUserName());
-        getPasswordField().setValue(user.getPassword());
-        getLoginButton().click();
+        $(LOGIN_USERNAME_FIELD).setValue(user.getUserName());
+        $(LOGIN_PASSWORD_FIELD).setValue(user.getPassword());
+        $(LOGIN_BUTTON).click();
         return new StartPage();
     }
-
-    private SelenideElement getUserNameField() {
-        return $(LOGIN_USERNAME_FIELD);
-    }
-
-    private SelenideElement getPasswordField() {
-        return $(LOGIN_PASSWORD_FIELD);
-    }
-
-    private SelenideElement getLoginButton() {
-        return $(LOGIN_BUTTON);
-    }
-
 }
