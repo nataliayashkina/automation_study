@@ -3,6 +3,8 @@ package com.qa.test.ui.Pages;
 import com.codeborne.selenide.SelenideDriver;
 import com.qa.test.ui.Util.PropertiesContext;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
+import org.assertj.core.internal.bytebuddy.utility.RandomString;
 
 public abstract class AbstractPage {
     protected SelenideDriver driver;
@@ -37,4 +39,7 @@ public abstract class AbstractPage {
         }
     }
 
+    public int getRandomNumber(int start, int end) {
+        return RandomUtils.nextInt(start, end);
+    }
 }

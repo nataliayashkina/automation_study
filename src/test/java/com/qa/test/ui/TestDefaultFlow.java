@@ -36,7 +36,7 @@ public class TestDefaultFlow extends AbstractTest {
         startPage.goToBankRegistration();
         String name = getRandomString(10);
         DataOfCityAndState dataOfCityAndState = new DataOfCityAndState();
-        String dateOfBirth = dataOfCityAndState.getDay() + "." + dataOfCityAndState.getMonth() + "." + dataOfCityAndState.getYear();
+        String dateOfBirth = String.valueOf(getRandomNumberFromRange(1, 31)) + String.valueOf(getRandomNumberFromRange(1, 12)) + String.valueOf(getRandomNumberFromRange(1940, 2000));
         String city = dataOfCityAndState.getRandomCity();
         String address = getRandomString(5) + "street" + getRandomNumber(3);
         String state = dataOfCityAndState.getRandomState();
@@ -47,5 +47,28 @@ public class TestDefaultFlow extends AbstractTest {
         newCustomerPage.registration(name, dateOfBirth, city, address, state, pin, email, phoneNumber);
         Assert.assertEquals(newCustomerPage.getSuccessRegistrationMessage(),
                 "Could not connect: Access denied for user 'root'@'localhost' (using password: NO)");
+    }
+
+    @Test(description = "Insurance customer registration")
+    public void testInsuranceRegistration() {
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(Users.ADMIN);
+        startPage.checkOfLogin();
+        startPage.goToInsurancePage();
+        InsurancePage insurancePage = new InsurancePage();
+        insurancePage.goToRegistration();
+        NewInsuranceCustomerPage newInsuranceCustomerPage = new NewInsuranceCustomerPage();
+        DataOfCityAndState dataOfCityAndState = new DataOfCityAndState();
+        String firstName = getRandomString(10);
+        String lastName = getRandomString(12);
+        String phone = "+" + getRandomNumber(10);
+        String street = dataOfCityAndState.getRandomStreet();
+        String city = dataOfCityAndState.getRandomCity();
+        String country = dataOfCityAndState.getCountry();
+        String postCode = getRandomString(2) + getRandomNumber(2);
+        String email = getRandomString(5) + "@test.com";
+        String password = getRandomString(7);
+        newInsuranceCustomerPage.insuranceRegistration(firstName, lastName, phone, street, city, country, postCode, email, password);
     }
 }

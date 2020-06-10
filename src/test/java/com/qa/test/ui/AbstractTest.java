@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideDriver;
 import com.qa.test.ui.Util.PropertiesContext;
 import com.qa.test.ui.Util.WebDriverWrapper;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -35,11 +36,15 @@ public abstract class AbstractTest {
     }
 
     protected String getRandomString(int length) {
-        return RandomStringUtils.random(length, true, true);
+        return RandomStringUtils.random(length, true, false);
     }
 
     protected String getRandomNumber(int length) {
         return RandomStringUtils.random(length, false, true);
+    }
+
+    public int getRandomNumberFromRange(int start, int end) {
+        return RandomUtils.nextInt(start, end);
     }
 
 }

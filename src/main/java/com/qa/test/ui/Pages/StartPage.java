@@ -9,6 +9,7 @@ public class StartPage extends AbstractPage {
     private static final String LOGOUT_BUTTON = "[href='Logout.php']";
     private static final String TELECOM_BUTTON = "[href='http://demo.guru99.com/telecom/index.html']";
     private static final String NEW_CUSTOMER_PAGE = "[href='addcustomerpage.php']";
+    private static final String INSURANCE_BUTTON = "[href='http://demo.guru99.com/insurance/v1/index.php']";
 
     public void checkOfLogin() {
         $(LOGOUT_BUTTON).shouldBe(Condition.visible);
@@ -22,5 +23,9 @@ public class StartPage extends AbstractPage {
     public NewCustomerPage goToBankRegistration() {
         $(NEW_CUSTOMER_PAGE).click();
         return new NewCustomerPage();
+    }
+    public InsurancePage goToInsurancePage(){
+        $(INSURANCE_BUTTON).click();
+        return new InsurancePage();
     }
 }
