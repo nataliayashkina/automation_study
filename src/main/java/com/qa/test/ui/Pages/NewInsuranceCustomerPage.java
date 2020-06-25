@@ -1,6 +1,9 @@
 package com.qa.test.ui.Pages;
 
 import com.qa.test.ui.Util.DataOfCityAndState;
+import com.qa.test.ui.Util.Environment.Genders;
+
+import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -26,9 +29,9 @@ public class NewInsuranceCustomerPage extends AbstractPage {
     public InsurancePage insuranceRegistration(String firstName, String lastName, String phone, String street,
                                                String city, String country, String postCode, String email, String password) {
         DataOfCityAndState dataOfCityAndState = new DataOfCityAndState();
-        String gender = dataOfCityAndState.getRandomGender();
-        $(GENDER).selectOption(gender);
-        $(YEAR).selectOptionByValue(String.valueOf(getRandomNumber(1940, 1999)));
+        Genders gender = Genders.randomGender();
+        $(GENDER).selectOption(String.valueOf(gender));
+        $(YEAR).selectOptionByValue(String.valueOf(getRandomNumber(1940, 1995)));
         $(MONTH).selectOptionByValue(String.valueOf(getRandomNumber(1, 12)));
         $(DAY).selectOptionByValue(String.valueOf(getRandomNumber(1, 31)));
         $(LICENCE).selectOptionByValue(String.valueOf(getRandomNumber(1, 50)));
@@ -43,6 +46,10 @@ public class NewInsuranceCustomerPage extends AbstractPage {
         $(EMAIL).setValue(email);
         $(PASSWORD).setValue(password);
         $(CONFIRM_PASSWORD).setValue(password);
+        $(SUBMIT_BUTTON).click();
+        return new InsurancePage();
+    }
+    public InsurancePage negativeRegistration(){
         $(SUBMIT_BUTTON).click();
         return new InsurancePage();
     }

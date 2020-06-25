@@ -10,6 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Random;
 
 public abstract class AbstractTest {
     protected PropertiesContext context;
@@ -45,6 +48,9 @@ public abstract class AbstractTest {
 
     public int getRandomNumberFromRange(int start, int end) {
         return RandomUtils.nextInt(start, end);
+    }
+    public static LocalDate randomBirthday() {
+        return LocalDate.now().minus(Period.ofDays((new Random().nextInt(365 * 200))));
     }
 
 }

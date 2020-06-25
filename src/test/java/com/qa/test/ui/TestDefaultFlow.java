@@ -6,8 +6,14 @@ import com.qa.test.ui.Util.DataOfCityAndState;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatterBuilder;
+import java.util.*;
+import java.util.spi.CalendarDataProvider;
+
 public class TestDefaultFlow extends AbstractTest {
-    @Test(description = "telecom")
+    @Test(description = "telecom customer registration")
     public void testTelecomRegistration() {
         String name = getRandomString(10);
         String lastName = getRandomString(12);
@@ -25,6 +31,19 @@ public class TestDefaultFlow extends AbstractTest {
         newTelecomCustomerPage.registration(name, lastName, email, address, phoneNumber);
         TelecomAccessDetailsPage telecomAccessDetailsPage = new TelecomAccessDetailsPage();
         telecomAccessDetailsPage.checkOfRegistration();
+    }
+
+    @Test(description = "Negative scenario for telecom registration")
+    public void testNegativeTelecomRegistration(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(Users.ADMIN);
+        startPage.checkOfLogin();
+        startPage.goToTelecomPage();
+        TelecomPage telecomPage = new TelecomPage();
+        telecomPage.goToRegistration();
+        NewTelecomCustomerPage newTelecomCustomerPage = new NewTelecomCustomerPage();
+        newTelecomCustomerPage.negativeRegistration();
     }
 
     @Test(description = "Bank customer registration")
@@ -48,13 +67,35 @@ public class TestDefaultFlow extends AbstractTest {
         Assert.assertEquals(newCustomerPage.getSuccessRegistrationMessage(),
                 "Could not connect: Access denied for user 'root'@'localhost' (using password: NO)");
     }
+    @Test(description = "Negative scenario for Bank Registration")
+    public void testNegativeBankRegistration(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(Users.ADMIN);
+        startPage.checkOfLogin();
+        startPage.goToBankRegistration();
+        String name = getRandomString(10);
+        DataOfCityAndState dataOfCityAndState = new DataOfCityAndState();
+        String dateOfBirth = randomBirthday().toString();
+        String city = dataOfCityAndState.getRandomCity();
+        String address = getRandomString(5) + "street" + getRandomNumber(3);
+        String state = dataOfCityAndState.getRandomState();
+        String pin = getRandomNumber(6);
+        String email = "$%^&*$#" + "@test.com";
+        String phoneNumber = "+" + getRandomNumber(2);
+        NewCustomerPage newCustomerPage = new NewCustomerPage();
+        newCustomerPage.registration(name, dateOfBirth, city, address, state, pin, email, phoneNumber);
+        Assert.assertEquals(newCustomerPage.getSuccessRegistrationMessage(),
+                "Could not connect: Access denied for user 'root'@'localhost' (using password: NO)");
+
+    }
 
     @Test(description = "Insurance customer registration")
     public void testInsuranceRegistration() {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(Users.ADMIN);
-        startPage.checkOfLogin();
+        //startPage.checkOfLogin();
         startPage.goToInsurancePage();
         InsurancePage insurancePage = new InsurancePage();
         insurancePage.goToRegistration();
@@ -70,5 +111,17 @@ public class TestDefaultFlow extends AbstractTest {
         String email = getRandomString(5) + "@test.com";
         String password = getRandomString(7);
         newInsuranceCustomerPage.insuranceRegistration(firstName, lastName, phone, street, city, country, postCode, email, password);
+    }
+    @Test(description = "Negative scenario for bank registration")
+    public void testNegativeInsuranceRegistration(){
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(Users.ADMIN);
+        startPage.checkOfLogin();
+        startPage.goToInsurancePage();
+        InsurancePage insurancePage = new InsurancePage();
+        insurancePage.goToRegistration();
+        NewInsuranceCustomerPage newInsuranceCustomerPage = new NewInsuranceCustomerPage();
+        newInsuranceCustomerPage.negativeRegistration();
     }
 }
