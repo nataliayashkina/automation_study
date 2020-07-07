@@ -7,9 +7,9 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class NewCustomerPage extends AbstractPage {
     private static final String NAME_INPUT = "[name='name']";
-    private static final String DATE_OF_BIRTH = "[name='dob']";
+    private static final String DATE_OF_BIRTH = "input#dob";
     private static final String CITY_NAME = "[name='city']";
-    private static final String ADRESS = "[name='addr']";
+    private static final String ADRESS = "textarea";
     private static final String STATE = "[name='state']";
     private static final String PIN = "[name='pinno']";
     private static final String EMAIL = "[name='emailid']";

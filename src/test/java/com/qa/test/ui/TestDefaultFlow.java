@@ -6,25 +6,18 @@ import com.qa.test.ui.Util.DataOfCityAndState;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.*;
-import java.util.spi.CalendarDataProvider;
-
 public class TestDefaultFlow extends AbstractTest {
     @Test(description = "telecom customer registration")
     public void testTelecomRegistration() {
+        LoginPage loginPage = new LoginPage();
+        loginPage.goToLoginPage();
+        StartPage startPage = loginPage.login(Users.ADMIN);
+        startPage.goToTelecomPage();
         String name = getRandomString(10);
         String lastName = getRandomString(12);
         String email = getRandomString(7) + "@test.com";
         String phoneNumber = "+" + getRandomNumber(9);
         String address = getRandomString(7) + "street" + getRandomNumber(3);
-        LoginPage loginPage = new LoginPage();
-        loginPage.goToLoginPage();
-        StartPage startPage = loginPage.login(Users.ADMIN);
-        startPage.checkOfLogin();
-        startPage.goToTelecomPage();
         TelecomPage telecomPage = new TelecomPage();
         telecomPage.goToRegistration();
         NewTelecomCustomerPage newTelecomCustomerPage = new NewTelecomCustomerPage();
@@ -38,7 +31,6 @@ public class TestDefaultFlow extends AbstractTest {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(Users.ADMIN);
-        startPage.checkOfLogin();
         startPage.goToTelecomPage();
         TelecomPage telecomPage = new TelecomPage();
         telecomPage.goToRegistration();
@@ -51,7 +43,6 @@ public class TestDefaultFlow extends AbstractTest {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(Users.ADMIN);
-        startPage.checkOfLogin();
         startPage.goToBankRegistration();
         String name = getRandomString(10);
         DataOfCityAndState dataOfCityAndState = new DataOfCityAndState();
@@ -72,7 +63,6 @@ public class TestDefaultFlow extends AbstractTest {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(Users.ADMIN);
-        startPage.checkOfLogin();
         startPage.goToBankRegistration();
         String name = getRandomString(10);
         DataOfCityAndState dataOfCityAndState = new DataOfCityAndState();
@@ -95,7 +85,6 @@ public class TestDefaultFlow extends AbstractTest {
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(Users.ADMIN);
-        //startPage.checkOfLogin();
         startPage.goToInsurancePage();
         InsurancePage insurancePage = new InsurancePage();
         insurancePage.goToRegistration();
@@ -110,18 +99,78 @@ public class TestDefaultFlow extends AbstractTest {
         String postCode = getRandomString(2) + getRandomNumber(2);
         String email = getRandomString(5) + "@test.com";
         String password = getRandomString(7);
-        newInsuranceCustomerPage.insuranceRegistration(firstName, lastName, phone, street, city, country, postCode, email, password);
+        newInsuranceCustomerPage.insuranceFillingRegistrationForm(firstName, lastName, phone, street, city, country, postCode, email, password);
     }
     @Test(description = "Negative scenario for bank registration")
     public void testNegativeInsuranceRegistration(){
         LoginPage loginPage = new LoginPage();
         loginPage.goToLoginPage();
         StartPage startPage = loginPage.login(Users.ADMIN);
-        startPage.checkOfLogin();
         startPage.goToInsurancePage();
         InsurancePage insurancePage = new InsurancePage();
         insurancePage.goToRegistration();
+        String firstName = "";
+        String lastName = "";;
+        String phone = "";
+        String street = "";
+        String city = "";
+        String country = "";
+        String postCode = "";
+        String email = "";
+        String password = "";
         NewInsuranceCustomerPage newInsuranceCustomerPage = new NewInsuranceCustomerPage();
-        newInsuranceCustomerPage.negativeRegistration();
+        newInsuranceCustomerPage.insuranceFillingRegistrationForm(firstName, lastName, phone, street, city, country, postCode, email, password);
+    }
+
+    @Test(description = "Contact Us positive filling form")
+    public void contactPositiveTest(){
+        WebDriverUniversityStartPage webDriverUniversityStartPage = new WebDriverUniversityStartPage();
+        webDriverUniversityStartPage.goToStartPage();
+        webDriverUniversityStartPage.goToContactPage();
+        WebDriverUniversityContactPage webDriverUniversityContactPage = new WebDriverUniversityContactPage();
+        String firstName = getRandomString(10);
+        String lastName = getRandomString(12);
+        String email = getRandomString(7) + "@test.com";
+        String comment = getRandomString(20);
+        webDriverUniversityContactPage.fillingContactUsForm(firstName,lastName,email,comment);
+        webDriverUniversityContactPage.getSuccessContactMessage();
+    }
+
+    @Test(description = "Contact us empty filling form")
+    public void contactNegativeTest(){
+        WebDriverUniversityStartPage webDriverUniversityStartPage = new WebDriverUniversityStartPage();
+        webDriverUniversityStartPage.goToStartPage();
+        webDriverUniversityStartPage.goToContactPage();
+        WebDriverUniversityContactPage webDriverUniversityContactPage = new WebDriverUniversityContactPage();
+        String firstName = new String();
+        String lastName = new String();
+        String email = new String();
+        String comment = new String();
+        webDriverUniversityContactPage.fillingContactUsForm(firstName,lastName,email,comment);
+        webDriverUniversityContactPage.getErrorMessage();
+    }
+
+    @Test(description = "Login Portal positive test")
+    public void loginPositiveTest(){
+        WebDriverUniversityStartPage webDriverUniversityStartPage = new WebDriverUniversityStartPage();
+        webDriverUniversityStartPage.goToStartPage();
+        webDriverUniversityStartPage.goToLoginPortalPage();
+        WebDriverUniversityLoginPortalPage webDriverUniversityLoginPortalPage = new WebDriverUniversityLoginPortalPage();
+        String username = "webdriver";
+        String password = "webdriver123";
+        webDriverUniversityLoginPortalPage.fillingLoginForm(username, password);
+        webDriverUniversityLoginPortalPage.getSuccessAlert();
+    }
+
+    @Test(description = "Login Portal negative test")
+    public void loginNegativeTest(){
+        WebDriverUniversityStartPage webDriverUniversityStartPage = new WebDriverUniversityStartPage();
+        webDriverUniversityStartPage.goToStartPage();
+        webDriverUniversityStartPage.goToLoginPortalPage();
+        WebDriverUniversityLoginPortalPage webDriverUniversityLoginPortalPage = new WebDriverUniversityLoginPortalPage();
+        String username = getRandomString(10);
+        String password = getRandomString(10);
+        webDriverUniversityLoginPortalPage.fillingLoginForm(username, password);
+        webDriverUniversityLoginPortalPage.getFailAlert();
     }
 }
